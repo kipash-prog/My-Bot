@@ -31,7 +31,6 @@ Only the admin can use the `/get_bot_info` and `/get_bot_usage` commands.
     TELEGRAM_API_KEY=your_telegram_api_key
     GEMINI_API_KEY=your_gemini_api_key
     ```
-    ```
 3. Run the bot:
     ```
     python bot.py
