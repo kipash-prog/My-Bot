@@ -28,8 +28,8 @@ Only the admin can use the `/get_bot_info` and `/get_bot_usage` commands.
 1. Clone the repository.
 2. Create a `.env` file in the root directory and add the following environment variables:
     ```
-    TELEGRAM_API_KEY=your_telegram_api_key
-    GEMINI_API_KEY=your_gemini_api_key
+    TELEGRAM_API_KEY="your_telegram_api_key"
+    GEMINI_API_KEY="your_gemini_api_key"
     ```
 3. Run the bot:
     ```
