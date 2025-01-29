@@ -47,6 +47,7 @@ Only the admin can use the `/get_bot_info` and `/get_bot_usage` commands.
 ## Developer
 
 This bot was developed by Kidus Shimelis (@Kipa_s).
+
 phone number:- +251912063708
 
 ## License
