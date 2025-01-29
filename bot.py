@@ -206,49 +206,6 @@ async def show_continue_options(update: Update, context: CallbackContext) -> Non
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text('Do you need anything else?', reply_markup=reply_markup)
 
-def send_ppt(update: Update, context: CallbackContext) -> None:
-    file_path = 'path_to_your_ppt_file.pptx'
-    try:
-        update.message.reply_text('Here is your PPT file:')
-        update.message.reply_document(document=open(file_path, 'rb'))
-        show_continue_options(update, context)
-    except FileNotFoundError:
-        update.message.reply_text('Sorry, the PPT file was not found.')
-
-def send_note(update: Update, context: CallbackContext) -> None:
-    file_path = 'path_to_your_note_file.txt'
-    try:
-        update.message.reply_text('Here is your note:')
-        update.message.reply_document(document=open(file_path, 'rb'))
-        show_continue_options(update, context)
-    except FileNotFoundError:
-        update.message.reply_text('Sorry, the note file was not found.')
-
-async def send_file(update: Update, context: CallbackContext) -> None:
-    query = update.callback_query
-    await query.answer()
-    file_map = {
-        'ppt1': 'path_to_ppt1.pptx',
-        'pdf1': 'path_to_pdf1.pdf',
-        'ppt2': 'path_to_ppt2.pptx',
-        'pdf2': 'path_to_pdf2.pdf',
-        'ppt3': 'path_to_ppt3.pptx',
-        'pdf3': 'path_to_pdf3.pdf',
-        'ppt4': 'path_to_ppt4.pptx',
-        'pdf4': 'path_to_pdf4.pdf',
-        'ppt5': 'path_to_ppt5.pptx',
-        'pdf5': 'path_to_pdf5.pdf',
-        'ppt6': 'path_to_ppt6.pptx',
-        'pdf6': 'path_to_pdf6.pdf'
-    }
-    file_path = file_map.get(query.data)
-    if file_path:
-        try:
-            await query.message.reply_document(document=open(file_path, 'rb'))
-            await show_continue_options(update, context)
-        except FileNotFoundError:
-            await query.message.reply_text('Sorry, the requested file was not found.')
-
 async def help_command(update: Update, context: CallbackContext) -> None:
     help_text = (
         "/start: Kickstart the conversation and explore features.\n"
