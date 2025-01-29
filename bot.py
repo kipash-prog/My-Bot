@@ -268,7 +268,7 @@ def get_ai_response(question: str) -> str:
     return response.text
 
 # Admin username
-ADMIN_USERNAME = "Kipa_s"
+ADMIN_USERNAME = "ADD_BOT_ADMIN_USER_NAME"
 
 def is_admin(username: str) -> bool:
     return username == ADMIN_USERNAME
