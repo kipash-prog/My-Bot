@@ -257,7 +257,10 @@ async def show_continue_options(update: Update, context: CallbackContext) -> Non
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text("Do you need anything else?", reply_markup=reply_markup)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 269fddacba4ff2a5ead09b3bbf766ca8a2a58b79
 async def help_command(update: Update, context: CallbackContext) -> None:
     """Handle the /help command."""
     help_text = (
@@ -323,7 +326,7 @@ def get_ai_response(question: str) -> str:
 
 
 # Admin username
-ADMIN_USERNAME = "Kipa_s"
+ADMIN_USERNAME = "ADD_BOT_ADMIN_USER_NAME"
 
 
 def is_admin(username: str) -> bool:
