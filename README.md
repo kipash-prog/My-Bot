@@ -46,19 +46,14 @@ Only the admin can use the `/get_bot_info` and `/get_bot_usage` commands.
     cd is-bot
     ```
 2. Create a `.env` file in the root directory and add the following environment variables:
-    ```
-<<<<<<< HEAD
+    
     TELEGRAM_API_KEY=your_telegram_api_key
     GEMINI_API_KEY=your_gemini_api_key
-    ```
+    
 
 3. Install the required dependencies:
     ```sh
     pip install -r requirements.txt
-=======
-    TELEGRAM_API_KEY="your_telegram_api_key"
-    GEMINI_API_KEY="your_gemini_api_key"
->>>>>>> 269fddacba4ff2a5ead09b3bbf766ca8a2a58b79
     ```
 
 4. Run the bot:
@@ -74,7 +69,7 @@ Only the admin can use the `/get_bot_info` and `/get_bot_usage` commands.
 
 ## Developer
 
-<<<<<<< HEAD
+
 This bot was developed by Kidus Shimelis ([https://t.me/Kipa_s](https://t.me/Kipa_s)).
 
 Phone number: +251912063708
@@ -82,7 +77,7 @@ Phone number: +251912063708
 This bot was developed by Kidus Shimelis ((https://t.me/Kipa_s)).
 
 phone number:- +251912063708
->>>>>>> 269fddacba4ff2a5ead09b3bbf766ca8a2a58b79
+
 
 ## License
 
