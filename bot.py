@@ -109,6 +109,7 @@ async def button(update: Update, context: CallbackContext) -> None:
         if data == "ai_assistance":
             await query.message.reply_text(text="Please type your question:")
             context.user_data["awaiting_question"] = True
+            context.user_data["awaiting_feedback"] = False  # Ensure feedback flag is reset
         elif data == "course":
             keyboard = [
                 [
@@ -193,46 +194,46 @@ async def button(update: Update, context: CallbackContext) -> None:
             await query.message.reply_text(text="Choose a course:", reply_markup=reply_markup)
         elif data == "3rd_year_2nd_semester":
             keyboard = [
-                [InlineKeyboardButton("Administration of Systems and Networks", url="https://t.me/admin_sys_net")],
-                [InlineKeyboardButton("E-commerce", url="https://t.me/ecommerce_course")],
-                [InlineKeyboardButton("Information System Security", url="https://t.me/iss_course")],
-                [InlineKeyboardButton("Advanced Internet Programming", url="https://t.me/adv_internet_prog")],
-                [InlineKeyboardButton("Mobile Computing", url="https://t.me/mobile_computing")],
-                [InlineKeyboardButton("Object Oriented System Analysis and Design", url="https://t.me/oosad")],
+                [InlineKeyboardButton("Administration of Systems and Networks", url="https://t.me/+nbEp2QzhXnc5MzQ8")],
+                [InlineKeyboardButton("E-commerce", url="https://t.me/+pzlk_LFFsXM1MTJk")],
+                [InlineKeyboardButton("Information System Security", url="https://t.me/+HKvUZIHRWnJkNTg0")],
+                [InlineKeyboardButton("Advanced Internet Programming", url="https://t.me/+amrAFLVINhtmOWQ0")],
+                [InlineKeyboardButton("Mobile Computing", url="https://t.me/+TkWmvwlvoOA5OGM8")],
+                [InlineKeyboardButton("Object Oriented System Analysis and Design", url="https://t.me/+MpQPPsO4k0g1NGJk")],
                 [InlineKeyboardButton("Exit", callback_data="end")],
             ]
             reply_markup = InlineKeyboardMarkup(keyboard)
             await query.message.reply_text(text="Choose a course:", reply_markup=reply_markup)
         elif data == "4th_year_1st_semester":
             keyboard = [
-                [InlineKeyboardButton("Inclusiveness", url="https://t.me/project_management")],
-                [InlineKeyboardButton("Intoduction to Artificial Intelligence", url="https://t.me/artificial_intelligence")],
+                [InlineKeyboardButton("Inclusiveness", url="https://t.me/+jO5pgCBKxtRjYzRk")],
+                [InlineKeyboardButton("Intoduction to Artificial Intelligence", url="https://t.me/+ZUXasZmbnHQyNGE8")],
                 [
                     InlineKeyboardButton(
-                        "Information System Project Management", url="https://t.me/project_management"
+                        "Information System Project Management", url="https://t.me/+5hoGTfWH21BkNjRk"
                     )
                 ],
-                [InlineKeyboardButton("Human-Computer Interaction", url="https://t.me/hci")],
+                [InlineKeyboardButton("Human-Computer Interaction", url="https://t.me/+ErN62G-o8202MDFk")],
                 [InlineKeyboardButton("Exit", callback_data="end")],
             ]
             reply_markup = InlineKeyboardMarkup(keyboard)
             await query.message.reply_text(text="Choose a course:", reply_markup=reply_markup)
         elif data == "4th_year_2nd_semester":
             keyboard = [
-                [InlineKeyboardButton("Global Trends", url="https://t.me/isp")],
-                [InlineKeyboardButton("Knowledge Management", url="https://t.me/knowledge_management")],
+                [InlineKeyboardButton("Global Trends", url="https://t.me/+aE2ugQlMxb00ODQ0")],
+                [InlineKeyboardButton("Knowledge Management", url="https://t.me/+FCW1SvBdVAxmOGQ8")],
                 [
                     InlineKeyboardButton(
-                        "Management Of Information System and Services", url="https://t.me/iss"
+                        "Management Of Information System and Services", url="https://t.me/+hiZcqPa4_mI0NGVk"
                     )
                 ],
-                [InlineKeyboardButton("Enterprise Systems", url="https://t.me/it_audit")],
+                [InlineKeyboardButton("Enterprise Systems", url="https://t.me/+XQrsE3FJKZgyZGFk")],
                 [
                     InlineKeyboardButton(
-                        "Introduction to Data Science and Analytics", url="https://t.me/internship"
+                        "Introduction to Data Science and Analytics", url="https://t.me/+Z3HIo14ZWuliMjc8"
                     )
                 ],
-                [InlineKeyboardButton("History", url="https://t.me/ethical_hacking")],
+                [InlineKeyboardButton("History", url="https://t.me/+vHTIjzcxu9Q4Yzhk")],
                 [InlineKeyboardButton("Exit", callback_data="end")],
             ]
             reply_markup = InlineKeyboardMarkup(keyboard)
@@ -257,10 +258,7 @@ async def show_continue_options(update: Update, context: CallbackContext) -> Non
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text("Do you need anything else?", reply_markup=reply_markup)
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 269fddacba4ff2a5ead09b3bbf766ca8a2a58b79
 async def help_command(update: Update, context: CallbackContext) -> None:
     """Handle the /help command."""
     help_text = (
@@ -268,7 +266,7 @@ async def help_command(update: Update, context: CallbackContext) -> None:
         "/ask: Ask a question to the AI.\n"
         "/help: Get assistance with commands and usage.\n"
         "/faq: Frequently asked questions.\n"
-        "feedback: Send feedback to the developer.\n"
+        "/feedback: Send feedback to the developer.\n"
     )
     await update.message.reply_text(help_text)
 
@@ -288,29 +286,23 @@ async def handle_message(update: Update, context: CallbackContext) -> None:
             # Fetch answer from AI
             answer = get_ai_response(question)
             await update.message.reply_text(f"{answer}")
-            await show_exit_option(update, context)
+            await show_exit_option(update, context)  # Show only exit option after AI response
             context.user_data["awaiting_question"] = True  # Keep awaiting for the next question
             await track_user_action(user_id, "ask_question")
         elif context.user_data.get("awaiting_feedback"):
-            feedback_text = update.message.text
-            admin_chat_id = os.getenv("ADMIN_CHAT_ID")
-            if admin_chat_id:
-                await context.bot.send_message(
-                    chat_id=admin_chat_id,
-                    text=f"Feedback from {update.message.from_user.username}: {feedback_text}",
-                )
-                await update.message.reply_text("Thank you for your feedback!")
-            else:
-                await update.message.reply_text("Failed to send feedback. Admin chat ID is not set.")
-            context.user_data["awaiting_feedback"] = False
+            await update.message.reply_text("Please contact @kipa_s to send your feedback.")
+            context.user_data["awaiting_feedback"] = False  # Reset the flag after handling feedback
             await track_user_action(user_id, "send_feedback")
-            await start(update, context)
+            await start(update, context)  # Redirect to start
         elif update.message.text.startswith("/"):
             await update.message.reply_text("Unknown command. Please use /help to see the available commands.")
             await help_command(update, context)
             await track_user_action(user_id, "send_message")
         else:
-            await update.message.reply_text("Please use the /ask command to ask a question.")
+            if context.user_data.get("awaiting_question"):
+                await update.message.reply_text("Please use the /ask command to ask a question.")
+            elif context.user_data.get("awaiting_feedback"):
+                await update.message.reply_text("Please contact @kipa_s to send your feedback.")
             await show_exit_option(update, context)
             await track_user_action(user_id, "send_message")
     except Exception as e:
@@ -325,8 +317,18 @@ def get_ai_response(question: str) -> str:
     return response.text
 
 
+
+async def feedback(update: Update, context: CallbackContext) -> None:
+    """Handle the /feedback command."""
+    user_id = update.message.from_user.id
+    context.user_data["awaiting_feedback"] = False  # Ensure feedback flag is reset
+    await update.message.reply_text("You can send your feedback to the admin. Please contact @kipa_s.")
+    await track_user_action(user_id, "send_feedback")
+    await show_exit_option(update, context)  # Provide exit option
+
+
 # Admin username
-ADMIN_USERNAME = "ADD_BOT_ADMIN_USER_NAME"
+ADMIN_USERNAME = "kipa_s"
 
 
 def is_admin(username: str) -> bool:
@@ -375,14 +377,6 @@ async def get_bot_usage(update: Update, context: CallbackContext) -> None:
         f"Action Counts: {action_counts}"
     )
     await update.message.reply_text(usage_text)
-
-
-async def feedback(update: Update, context: CallbackContext) -> None:
-    """Handle the /feedback command."""
-    user_id = update.message.from_user.id
-    context.user_data["awaiting_feedback"] = True
-    await update.message.reply_text("Please type your feedback:")
-    await track_user_action(update.message.from_user.id, "send_feedback")
 
 
 def main() -> None:
