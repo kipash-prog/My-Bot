@@ -7,14 +7,12 @@ from telegram.ext import Application, CommandHandler, MessageHandler, CallbackCo
 from dotenv import load_dotenv
 import google.generativeai as genai
 
-# Enable logging
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO,
 )
 logger = logging.getLogger(__name__)
 
-# Load environment variables
 load_dotenv()
 TELEGRAM_API_KEY = os.getenv("TELEGRAM_API_KEY")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
