@@ -27,7 +27,6 @@ if not TELEGRAM_API_KEY or not GEMINI_API_KEY:
 genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel("gemini-1.5-flash")
 
-# Sample FAQs
 FAQS = {
     "⚪️Where is the department located?\n": (
         "✅The School of Information Science is located at 6K FBE Campus.\n\n"
